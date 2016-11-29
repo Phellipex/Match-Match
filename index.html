@@ -3,9 +3,9 @@
 <html>
     <head>
         <title>MATCH-MATCH</title>
-        <meta name="author" content="AN" />
+        <meta name="author" content="Andres Felipe Quintero"/>
         <meta charset="UTF-8">
-        <link rel="game favicon" href="./img/strawberry.png">
+        <link rel="strawberry icon" href="strawberry.png">
         <style>
             img, div {
                 position: absolute;
@@ -16,20 +16,31 @@
                 height:500px;    
             }
             
+            #credits {
+	            font-size:10pt;
+            }
+            
             #rightSide { 
                 left: 500px;
                 border-left: 1px solid black;
             }
 
-				#info {
-					left:1000px;
-				}				            
-                
+			#info {
+			    left:1000px;
+			}				              
         </style>
     </head>
     <body onLoad=generateFaces()>
         <h1>MATCH-MATCH</h1>
-        <p>Compare the left pane with the right one. Find the extra smiley and click on it!</p>
+        <p>
+            Compare the left pane with the right one. Find the extra smiley and click on it!
+	        <br>
+	        <span id="credits">icons designed by 
+                <a href='http://www.freepik.com/free-vector/fruit-icons_773760.htm'>Freepik</a>
+            </span>
+	    </p>
+        <br>
+        
         <div id="leftSide"></div>
         <div id="rightSide"></div>
         <div id="info">
@@ -47,6 +58,24 @@
             var levelPlaceholder = document.getElementById("level-placeholder")
             var difficultyPlaceholder = document.getElementById("difficulty-placeholder")
             var theBody = document.getElementsByTagName("body")[0];
+            var images = {1: 'watermelon.png',
+			  2: 'lemon.png',
+			  3: 'cut_pomegranate.png',
+			  4: 'cut_lemon.png',
+			  5: 'orange.png',
+			  6: 'cut_pear.png',
+			  7: 'strawberry.png',
+			  8: 'avocado.png',
+			  9 : 'cut_kiwi.png',
+			  10: 'cut_coconut.png',
+			  11: 'apple.png',
+			  12: 'tomato.png',
+			  13: 'cut_tomato.png',
+			  14: 'cut_apple.png',
+			  15: 'pear.png',
+			  16: 'cut_strawberry.png'
+			 }
+            var currentImage = 1;
             
 				function updatePlaceholder(placeholder, newValue){
 					placeholder.innerHTML = newValue;
@@ -65,7 +94,9 @@
 
                 for (var i = 0; i < numberOfFaces; i++){
                     var face = document.createElement("img");
-                    face.setAttribute("src", "./img/smile.png");
+                    currentImage = Math.floor(1 + (Math.random() * 16));
+                    
+                    face.setAttribute("src", "./img/" + images[currentImage]);
                     face.style.top = (Math.random(0, 400) * 400).toString() + "px";
                     face.style.left = (Math.random(0, 400) * 400).toString() + "px";
                     theLeftSide.appendChild(face);
@@ -93,6 +124,7 @@
                     numberOfFaces = 5;
                     currentLevel = 1;
                     updatePlaceholder(levelPlaceholder, currentLevel);
+                    updatePlaceholder(difficultyPlaceholder, numberOfFaces);
                     generateFaces();
                 }; 
             }
