@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>MATCH-MATCH</title>
+        <meta name="author" content="AN" />
+        <meta charset="UTF-8">
+        <link rel="game favicon" href="./img/strawberry.png">
+        <style>
+            img, div {
+                position: absolute;
+            }
+            
+            div {
+                width:500px;
+                height:500px;    
+            }
+            
+            #rightSide { 
+                left: 500px;
+                border-left: 1px solid black;
+            }
+
+				#info {
+					left:1000px;
+				}				            
+                
+        </style>
+    </head>
+    <body onLoad=generateFaces()>
+        <h1>MATCH-MATCH</h1>
+        <p>Compare the left pane with the right one. Find the extra smiley and click on it!</p>
+        <div id="leftSide"></div>
+        <div id="rightSide"></div>
+        <div id="info">
+            Current level: <span id="level-placeholder">1</span>
+            <br>
+            Difficulty level: <span id="difficulty-placeholder">5</span>
+        </div>
+
+        <script>
+            var numberOfFaces = 5;
+            var currentLevel = 1;
+
+            var theLeftSide = document.getElementById("leftSide");
+            var theRightSide = document.getElementById("rightSide");
+            var levelPlaceholder = document.getElementById("level-placeholder")
+            var difficultyPlaceholder = document.getElementById("difficulty-placeholder")
+            var theBody = document.getElementsByTagName("body")[0];
+            
+				function updatePlaceholder(placeholder, newValue){
+					placeholder.innerHTML = newValue;
+				}            
+            
+            function clearNode(nodeToClear){
+                while (nodeToClear.firstChild){
+                        nodeToClear.removeChild(nodeToClear.firstChild);
+                    }
+            }
+            
+            function generateFaces(){
+
+                clearNode(theLeftSide);
+                clearNode(theRightSide);
+
+                for (var i = 0; i < numberOfFaces; i++){
+                    var face = document.createElement("img");
+                    face.setAttribute("src", "./img/smile.png");
+                    face.style.top = (Math.random(0, 400) * 400).toString() + "px";
+                    face.style.left = (Math.random(0, 400) * 400).toString() + "px";
+                    theLeftSide.appendChild(face);
+                }
+
+                leftSideImages = theLeftSide.cloneNode(true);
+                leftSideImages.removeAttribute("id");
+                leftSideImages.removeChild(leftSideImages.lastChild);
+                theRightSide.appendChild(leftSideImages);
+                
+                theLeftSide.lastChild.onclick= function nextLevel(event){
+                    event.stopPropagation();
+                    numberOfFaces += 5;
+                    currentLevel += 1;
+                    alert("Congratulations, you completed level " + (currentLevel - 1).toString());
+                    updatePlaceholder(levelPlaceholder, currentLevel);
+                    updatePlaceholder(difficultyPlaceholder, numberOfFaces);
+                    generateFaces();
+                };
+                
+                    theBody.onclick = function gameOver() {
+                    alert("Game Over!");
+                    theBody.onclick = null;
+                    theLeftSide.lastChild.onclick = null;
+                    numberOfFaces = 5;
+                    currentLevel = 1;
+                    updatePlaceholder(levelPlaceholder, currentLevel);
+                    generateFaces();
+                }; 
+            }
+        </script>
+    </body>
+</html>
