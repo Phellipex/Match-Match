@@ -103,9 +103,12 @@
                 }
 
                 leftSideImages = theLeftSide.cloneNode(true);
-                leftSideImages.removeAttribute("id");
+                //leftSideImages.removeAttribute("id");
                 leftSideImages.removeChild(leftSideImages.lastChild);
-                theRightSide.appendChild(leftSideImages);
+                //theRightSide.appendChild(leftSideImages);
+                while (leftSideImages.firstChild) {
+		  theRightSide.appendChild(leftSideImages.firstChild);
+                }
                 
                 theLeftSide.lastChild.onclick= function nextLevel(event){
                     event.stopPropagation();
