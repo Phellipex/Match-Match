@@ -6,49 +6,42 @@
         <meta name="author" content="Andres Felipe Quintero"/>
         <meta charset="UTF-8">
         <link rel="strawberry icon" href="strawberry.png">
+        <link rel="stylesheet" href="./css/materialize/css/materialize.min.css">
         <style>
-            img, div {
-                position: absolute;
-            }
-            
-            div {
+            	        img {position: relative;}
+                              .panel {
                 width:500px;
                 height:500px;    
             }
-            
-            #credits {
-	            font-size:10pt;
-            }
-            
-            #rightSide { 
-                left: 500px;
-                border-left: 1px solid black;
-            }
-
-			#info {
-			    left:1000px;
-			}				              
         </style>
     </head>
     <body onLoad=generateFaces()>
-        <h1>MATCH-MATCH</h1>
-        <p>
-            Compare the left pane with the right one. Find the extra smiley and click on it!
-	        <br>
-	        <span id="credits">icons designed by 
-                <a href='http://www.freepik.com/free-vector/fruit-icons_773760.htm'>Freepik</a>
-            </span>
-	    </p>
-        <br>
-        
-        <div id="leftSide"></div>
-        <div id="rightSide"></div>
-        <div id="info">
-            Current level: <span id="level-placeholder">1</span>
-            <br>
-            Difficulty level: <span id="difficulty-placeholder">5</span>
+        <div class="container">
+            <div class="row">
+                <div class="col s12"
+                    <h1>MATCH-MATCH</h1>
+                    <p>
+                        Compare the left pane with the right one. Find the extra smiley and click on it!
+                        <br>
+                        <span id="credits">icons designed by 
+                            <a href='http://www.freepik.com/free-vector/fruit-icons_773760.htm'>Freepik</a>
+                        </span>
+                    </p>
+                </div>
+             </div>
+                
+            <div class="row">
+                <div id="leftSide" class="col s5 panel" style="background-color:red"></div>
+                <div id="rightSide" class="col s5 panel" style="background-color:blue"></div>
+                <div id="info" class="col s2">
+                    Current level: <span id="level-placeholder">1</span>
+                    <br>
+                    Difficulty level: <span id="difficulty-placeholder">5</span>
+                </div>
+            </div>
         </div>
-
+        
+        
         <script>
             var numberOfFaces = 5;
             var currentLevel = 1;
@@ -103,9 +96,12 @@
                 }
 
                 leftSideImages = theLeftSide.cloneNode(true);
-                leftSideImages.removeAttribute("id");
                 leftSideImages.removeChild(leftSideImages.lastChild);
-                theRightSide.appendChild(leftSideImages);
+                
+                while (theLeftSide.firstChild) {
+                    theRightSide.appendChild(leftSideImages.firstChild)
+                }
+                //theRightSide.appendChild(leftSideImages);
                 
                 theLeftSide.lastChild.onclick= function nextLevel(event){
                     event.stopPropagation();
@@ -117,7 +113,7 @@
                     generateFaces();
                 };
                 
-                    theBody.onclick = function gameOver() {
+                theBody.onclick = function gameOver() {
                     alert("Game Over!");
                     theBody.onclick = null;
                     theLeftSide.lastChild.onclick = null;
@@ -129,5 +125,7 @@
                 }; 
             }
         </script>
+        <script type="text/javascript" src="./js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="./css/materialize/js/materialize.min.js"></script>
     </body>
 </html>
