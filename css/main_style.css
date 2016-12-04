@@ -1,10 +1,9 @@
-.absolute-positioned {
-    position: absolute;
+body {
+    padding:2%;
 }
 
-.panel {
-    width:500px;
-    height:500px;    
+.absolute-positioned {
+    position: absolute !important;
 }
 
 #credits {
@@ -12,10 +11,21 @@
 }
 
 #rightSide { 
-    left: 500px;
-    border-left: 1px solid black;
+    border-style: none solid solid double;
+    border-width: 3px;
 }
 
-#info {
-    left:1000px;
+#leftSide {
+    border-style: none none solid solid;
+}
+
+#info-container {
+    margin-bottom: 0%;
+    margin-right: 0%;
+    height: 4em;
+    border: solid black 3px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    color:white;
+    font-size:14pt;
 }

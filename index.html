@@ -1,35 +1,53 @@
 <!DOCTYPE html>
-
 <html>
     <head>
         <title>MATCH-MATCH</title>
-        <meta name="author" content="Andres Felipe Quintero"/>
+        <meta name="author" content="Felipe Quintero" />
         <meta charset="UTF-8">
         <link rel="strawberry icon" href="strawberry.png">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="./css/materialize/css/materialize.min.css">
         <link rel="stylesheet" href="./css/main_style.css">
     </head>
     <body onLoad=generateFaces()>
-<div>
-        <h1>MATCH-MATCH</h1>
-        <p>
-            Compare the left pane with the right one. Find the extra image and click on it!
-	        <br>
-	        <span id="credits">icons designed by 
-                <a href='http://www.freepik.com/free-vector/fruit-icons_773760.htm' target="_blank">Freepik</a>
-            </span>
-	    </p>
-        <br>
-</div>
+        <div class="container">
+            <div class="row">
+                <div class="col s12">
+                    <h1 class="center-align">MATCH-MATCH</h1>
+                    <p class="flow-text center-align">
+                        Compare the left pane with the right one. Find the extra image and click on it!
+                        <br>
+	                    <span id="credits">icons designed by 
+                            <a href='http://www.freepik.com/free-vector/fruit-icons_773760.htm' target="_blank">Freepik</a>
+                        </span>
+	                </p>
+                </div>
+            </div>
         
-<div style="position:relative;width:95%:margin:auto;">
-        <div id="leftSide" class="absolute-positioned panel"></div>
-        <div id="rightSide" class="absolute-positioned panel"></div>
-        <div id="info" class="panel absolute-positioned">
-            Current level: <span id="level-placeholder">1</span>
-            <br>
-            Difficulty level: <span id="difficulty-placeholder">5</span>
+            <div id="info-container" class="row center-align valign-wrapper green">
+                <div class="col s4">
+                    Current level: <span id="level-placeholder">1</span>
+                </div>
+
+                <div class="col s4">
+                    Fruits: <span id="difficulty-placeholder">5</span>
+                </div>
+
+                <div class="col s4">
+                    <a id="hint-1" class="btn-floating waves-effect waves-light btn-large btn yellow darken-4" onclick=useHint(1)><i class="large material-icons">my_location</i></a>
+                    <a id="hint-2" class="btn-floating waves-effect waves-light btn-large btn green accent-4" onclick=useHint(2)><i class="large material-icons">whatshot</i></a>
+                    <a id="hint-2" class="btn-floating waves-effect waves-light btn-large btn red lighten-1" onclick=useHint(3,event)><i class="large material-icons">flight_takeoff</i></a>
+                    <a id="hint-2" class="btn-floating waves-effect waves-light btn-large btn brown darken-4" onclick=useHint(4)><i class="large material-icons">loop</i></a>
+                </div>
+            </div>
+
+            <div class="row" style="position:relative;">
+                <div id="leftSide" class="col s6 teal lighten-5 absolute-positioned panel"></div>           
+                <div id="rightSide" class="col s6 blue-grey lighten-5 absolute-positioned panel"></div>     
+            </div>
         </div>
-</div>
+        <script src="./js/jquery-3.1.1.min.js"></script>
+        <script src="./css/materialize/js/materialize.min.js"></script>
         <script src="./js/interaction.js"></script>
     </body>
 </html>
