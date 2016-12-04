@@ -1,0 +1,21 @@
+.absolute-positioned {
+    position: absolute;
+}
+
+.panel {
+    width:500px;
+    height:500px;    
+}
+
+#credits {
+    font-size:10pt;
+}
+
+#rightSide { 
+    left: 500px;
+    border-left: 1px solid black;
+}
+
+#info {
+    left:1000px;
+}
