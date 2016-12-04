@@ -1,131 +1,53 @@
 <!DOCTYPE html>
-
 <html>
     <head>
         <title>MATCH-MATCH</title>
-        <meta name="author" content="Andres Felipe Quintero"/>
+        <meta name="author" content="Felipe Quintero" />
         <meta charset="UTF-8">
         <link rel="strawberry icon" href="strawberry.png">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="./css/materialize/css/materialize.min.css">
-        <style>
-            	        img {position: relative;}
-                              .panel {
-                width:500px;
-                height:500px;    
-            }
-        </style>
+        <link rel="stylesheet" href="./css/main_style.css">
     </head>
     <body onLoad=generateFaces()>
         <div class="container">
             <div class="row">
-                <div class="col s12"
-                    <h1>MATCH-MATCH</h1>
-                    <p>
-                        Compare the left pane with the right one. Find the extra smiley and click on it!
+                <div class="col s12">
+                    <h1 class="center-align">MATCH-MATCH</h1>
+                    <p class="flow-text center-align">
+                        Compare the left pane with the right one. Find the extra image and click on it!
                         <br>
-                        <span id="credits">icons designed by 
-                            <a href='http://www.freepik.com/free-vector/fruit-icons_773760.htm'>Freepik</a>
+	                    <span id="credits">icons designed by 
+                            <a href='http://www.freepik.com/free-vector/fruit-icons_773760.htm' target="_blank">Freepik</a>
                         </span>
-                    </p>
-                </div>
-             </div>
-                
-            <div class="row">
-                <div id="leftSide" class="col s5 panel" style="background-color:red"></div>
-                <div id="rightSide" class="col s5 panel" style="background-color:blue"></div>
-                <div id="info" class="col s2">
-                    Current level: <span id="level-placeholder">1</span>
-                    <br>
-                    Difficulty level: <span id="difficulty-placeholder">5</span>
+	                </p>
                 </div>
             </div>
+        
+            <div id="info-container" class="row center-align valign-wrapper green">
+                <div class="col s4">
+                    Current level: <span id="level-placeholder">1</span>
+                </div>
+
+                <div class="col s4">
+                    Fruits: <span id="difficulty-placeholder">5</span>
+                </div>
+
+                <div class="col s4">
+                    <a id="hint-1" class="btn-floating waves-effect waves-light btn-large btn yellow darken-4" onclick=useHint(1)><i class="large material-icons">my_location</i></a>
+                    <a id="hint-2" class="btn-floating waves-effect waves-light btn-large btn green accent-4" onclick=useHint(2)><i class="large material-icons">whatshot</i></a>
+                    <a id="hint-2" class="btn-floating waves-effect waves-light btn-large btn red lighten-1" onclick=useHint(3,event)><i class="large material-icons">flight_takeoff</i></a>
+                    <a id="hint-2" class="btn-floating waves-effect waves-light btn-large btn brown darken-4" onclick=useHint(4)><i class="large material-icons">loop</i></a>
+                </div>
+            </div>
+
+            <div class="row" style="position:relative;">
+                <div id="leftSide" class="col s6 teal lighten-5 absolute-positioned panel"></div>           
+                <div id="rightSide" class="col s6 blue-grey lighten-5 absolute-positioned panel"></div>     
+            </div>
         </div>
-        
-        
-        <script>
-            var numberOfFaces = 5;
-            var currentLevel = 1;
-
-            var theLeftSide = document.getElementById("leftSide");
-            var theRightSide = document.getElementById("rightSide");
-            var levelPlaceholder = document.getElementById("level-placeholder")
-            var difficultyPlaceholder = document.getElementById("difficulty-placeholder")
-            var theBody = document.getElementsByTagName("body")[0];
-            var images = {1: 'watermelon.png',
-			  2: 'lemon.png',
-			  3: 'cut_pomegranate.png',
-			  4: 'cut_lemon.png',
-			  5: 'orange.png',
-			  6: 'cut_pear.png',
-			  7: 'strawberry.png',
-			  8: 'avocado.png',
-			  9 : 'cut_kiwi.png',
-			  10: 'cut_coconut.png',
-			  11: 'apple.png',
-			  12: 'tomato.png',
-			  13: 'cut_tomato.png',
-			  14: 'cut_apple.png',
-			  15: 'pear.png',
-			  16: 'cut_strawberry.png'
-			 }
-            var currentImage = 1;
-            
-				function updatePlaceholder(placeholder, newValue){
-					placeholder.innerHTML = newValue;
-				}            
-            
-            function clearNode(nodeToClear){
-                while (nodeToClear.firstChild){
-                        nodeToClear.removeChild(nodeToClear.firstChild);
-                    }
-            }
-            
-            function generateFaces(){
-
-                clearNode(theLeftSide);
-                clearNode(theRightSide);
-
-                for (var i = 0; i < numberOfFaces; i++){
-                    var face = document.createElement("img");
-                    currentImage = Math.floor(1 + (Math.random() * 16));
-                    
-                    face.setAttribute("src", "./img/" + images[currentImage]);
-                    face.style.top = (Math.random(0, 400) * 400).toString() + "px";
-                    face.style.left = (Math.random(0, 400) * 400).toString() + "px";
-                    theLeftSide.appendChild(face);
-                }
-
-                leftSideImages = theLeftSide.cloneNode(true);
-                leftSideImages.removeChild(leftSideImages.lastChild);
-                
-                while (theLeftSide.firstChild) {
-                    theRightSide.appendChild(leftSideImages.firstChild)
-                }
-                //theRightSide.appendChild(leftSideImages);
-                
-                theLeftSide.lastChild.onclick= function nextLevel(event){
-                    event.stopPropagation();
-                    numberOfFaces += 5;
-                    currentLevel += 1;
-                    alert("Congratulations, you completed level " + (currentLevel - 1).toString());
-                    updatePlaceholder(levelPlaceholder, currentLevel);
-                    updatePlaceholder(difficultyPlaceholder, numberOfFaces);
-                    generateFaces();
-                };
-                
-                theBody.onclick = function gameOver() {
-                    alert("Game Over!");
-                    theBody.onclick = null;
-                    theLeftSide.lastChild.onclick = null;
-                    numberOfFaces = 5;
-                    currentLevel = 1;
-                    updatePlaceholder(levelPlaceholder, currentLevel);
-                    updatePlaceholder(difficultyPlaceholder, numberOfFaces);
-                    generateFaces();
-                }; 
-            }
-        </script>
-        <script type="text/javascript" src="./js/jquery-3.1.1.min.js"></script>
-        <script type="text/javascript" src="./css/materialize/js/materialize.min.js"></script>
+        <script src="./js/jquery-3.1.1.min.js"></script>
+        <script src="./css/materialize/js/materialize.min.js"></script>
+        <script src="./js/interaction.js"></script>
     </body>
 </html>

@@ -1,0 +1,31 @@
+body {
+    padding:2%;
+}
+
+.absolute-positioned {
+    position: absolute !important;
+}
+
+#credits {
+    font-size:10pt;
+}
+
+#rightSide { 
+    border-style: none solid solid double;
+    border-width: 3px;
+}
+
+#leftSide {
+    border-style: none none solid solid;
+}
+
+#info-container {
+    margin-bottom: 0%;
+    margin-right: 0%;
+    height: 4em;
+    border: solid black 3px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    color:white;
+    font-size:14pt;
+}
