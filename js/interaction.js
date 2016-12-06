@@ -12,9 +12,7 @@ var hints = {
                 1:{
                     "available":true,
                     "action": function () {
-                        theLeftSide.lastChild.style.backgroundColor = "#008080";
-	               	    theLeftSide.lastChild.style.border = "2px solid black";
-	               	    theLeftSide.lastChild.style.borderRadius = "25px";
+                        theLeftSide.lastChild.className += " selected";                        
 	               	}
 	            },
                 
