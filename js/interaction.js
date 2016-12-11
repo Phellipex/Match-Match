@@ -19,7 +19,7 @@ var hints = {
                 2:{
                     "available":true,
                     "action": function () {
-                        let nodes = [].slice.call(theLeftSide.children);
+                        var nodes = [].slice.call(theLeftSide.children);
 	               	    for (node of nodes.slice(0, -1)) {
 	                        theLeftSide.removeChild(node);
 	               	    } 
