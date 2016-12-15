@@ -60,20 +60,37 @@ var images = {
 
 var currentImage = 1;
 
+/**
+ * Replaces the content of placeholder with the specified newValue
+ */
 function updatePlaceholder(placeholder, newValue) {
     placeholder.innerHTML = newValue;
 }
 
+/**
+ * Removes all the children nodes of the nodeToClear
+ */
 function clearNode(nodeToClear) {
     while (nodeToClear.firstChild){
         nodeToClear.removeChild(nodeToClear.firstChild);
     }
 }
 
+/**
+ * Takes a node of the DOM and applies a function to it.
+ * The function is bound to the onclick event only.
+ */
 function applyEvent(node, appliedFunction) {
     node.onclick = appliedFunction;
 }
 
+/**
+ * Stores the aids available to players. Each aid 
+ * has an action and a state associated to it.
+ * The action is the function that is executed upon
+ * using the aid. The state is a boolean value used
+ * to check if the aid has already been used.
+ */
 function useHint(hintNumber, event) {
     if (hints[hintNumber]["available"]) {
         if (event != null) {
@@ -87,6 +104,11 @@ function useHint(hintNumber, event) {
     }
 }
 
+/**
+ * Resets level, difficulty, number of faces and aid availability.
+ * It also repopulates the panels with new images. This is triggered
+ * upon losing.
+ */
 var gameOver = function () {
     alert("Game Over!");
     theLeftSide.lastChild.onclick = null;
@@ -98,6 +120,11 @@ var gameOver = function () {
     generateFaces();
 }
 
+/**
+ * Updates current level and difficulty. It also repopulates panels
+ * with more images for the next level. This is triggered upon
+ * clearing a level.
+ */
 var nextLevel = function (event) {
     event.stopPropagation();
     numberOfFaces += 5;
@@ -109,6 +136,12 @@ var nextLevel = function (event) {
     generateFaces();
 };
 
+/**
+ * Populates the panels with images chosen randomly from the images object.
+ * Images are randomly distributed on their respective panel (left or right).
+ * The left panel always has an extra image which triggers nextLevel on click.
+ * The remaining images all trigger gameOver when clicked.
+ */
 function generateFaces() {
     clearNode(theLeftSide);
     clearNode(theRightSide);
