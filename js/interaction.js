@@ -114,7 +114,9 @@ var gameOver = function () {
     theLeftSide.lastChild.onclick = null;
     numberOfFaces = 5;
     currentLevel = 1;
-    hints[1]["available"] = true;
+    for (var i=1; i <= Object.keys(hints).length; i++) {
+        hints[i]['available'] = true;
+    }
     updatePlaceholder(levelPlaceholder, currentLevel);
     updatePlaceholder(difficultyPlaceholder, numberOfFaces);
     generateFaces();
